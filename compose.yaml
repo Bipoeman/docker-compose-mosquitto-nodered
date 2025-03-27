@@ -1,6 +1,7 @@
 services:
   nodered:
-    build: ./nodered
+    image: nodered/node-red:latest
+    hostname: nodered-1
     ports:
       - 1880:1880
     volumes:
@@ -8,8 +9,14 @@ services:
     container_name: nodered
   mosquitto:
     build: ./mosquitto
+    hostname: mosquitto
     ports:
       - 1883:1883
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     container_name: mosquitto
+
+networks:
+  backend:
+    driver: bridge
+
